@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DETA Image Viewer</title>
+    <link href="./photoviewer.min.css" rel="stylesheet">
+</head>
+
+<body dir="ltr">
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="./photoviewer.min.js"></script>
+    <script>
+        // get the image from the URL
+        var url = location.search.split('url=')[1];
+        // Initialize the plugin
+        var viewer = new PhotoViewer([{ src: url }], { resizable: false, initMaximized: true, index: 0 });
+    </script>
+</body>
+
+</html>
