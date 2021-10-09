@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DETA Image Viewer</title>
+    <link href="./photoviewer.min.css" rel="stylesheet">
+</head>
+
+<body dir="ltr">
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="./photoviewer.min.js"></script>
+    <script>
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                function (m, key, value) {
+                    vars[key] = value;
+                });
+            return vars;
+        }
+
+        // get the image from the URL
+        const URL = getUrlVars()["url"];
+        const MAX_WIDTH = getUrlVars()["width"] || 800;
+
+        if (URL) {
+            const imgElement = document.createElement("img");
+            imgElement.src = URL;
+            imgElement.onload = function (e) {
+                const canvas = document.createElement("canvas");
+                // keep the aspect ratio of the image
+                const scaleSize = MAX_WIDTH / e.target.width;
+                canvas.width = MAX_WIDTH;
+                canvas.height = e.target.height * scaleSize;
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(e.target, 0, 0, canvas.width, canvas.height);
+                const srcEncoded = ctx.canvas.toDataURL(e.target, "image/jpeg");
+                // Initialize the plugin
+                var viewer = new PhotoViewer([{ src: srcEncoded, title: URL.split('/').pop() }], { resizable: false, initMaximized: true, index: 0 });
+            };
+        } else {
+            alert(`Please provide the url parameter`);
+        }
+
+    </script>
+</body>
+
+</html>
