@@ -14,12 +14,12 @@
     <script src="./photoviewer.min.js"></script>
     <script>
         // get the image from the URL
-        var url = location.search.split('url=')[1];
+        const url = location.search.split('url=')[1];
         if(url) {
             // Initialize the plugin
-            var viewer = new PhotoViewer([{ src: url }], { resizable: false, initMaximized: true, index: 0 });
+            const viewer = new PhotoViewer([{ src: url }], { resizable: false, initMaximized: true, index: 0 });
         } else {
-            alert(`Please provide the url parameter (https://pawiromitchel.github.io/POC-image-viewer/?url=...)`)
+            alert(`Please provide the url parameter`)
         }
     </script>
 </body>
